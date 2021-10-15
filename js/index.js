@@ -3,38 +3,52 @@ const hours = document.querySelector('[data-value="hours"]');
 const mins = document.querySelector('[data-value="mins"]');
 const secs = document.querySelector('[data-value="secs"]');
 const currentDate = document.querySelector('body')
-
 class Timer{
-    constructor(finishDate){
-        this.finishDate = finishDate
+    constructor(selector, targetDate){
+        this.targetDate = targetDate
         this.interval = null
         this.deltaTime = 0
-    }
-    start(){console.log('start')
+        this.selector = document.querySelector(selector) 
+        this.start()
+        }
+    start(){
     this.interval = setInterval(()=> {
         let currentTime = Date.now()
-        //console.log('current time', currentTime); 
-        this.deltaTime = this.finishDate - currentTime
-        //console.log('delta', this.deltaTime);
-        
-        days.textContent = this.pad(Math.floor(this.deltaTime / (1000 * 60 * 60 * 24)));
-        hours.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-        mins.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
+        this.deltaTime = this.targetDate - currentTime
+        days.textContent = this.pad(Math.floor(this.deltaTime / (1000 * 60 * 60 * 24)))
+        hours.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))
+        mins.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60)) / (1000 * 60)))
         secs.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60)) / 1000))
-    }, 1000);}
-    stop(){
-        clearInterval(this.interval)
-    }
+}, 1000);}
+    // stop(){
+    //     clearInterval(this.interval)
+
     pad(v){
         return String(v).padStart(2, '0')
     }
+    
 }
 
-const thisTimer = new Timer(new Date('Jan 1, 2022'))
-thisTimer.start()
-//thisTimer.stop()
+const thisTimer = new Timer(
+    selector = '#timer-1',
+    targetDate = new Date('Jan 1, 2022'),
+  );
+const thetTimer = new Timer(
+    selector = '#timer-2',
+    targetDate = new Date('Jan 3, 2022'),
+  );
+ 
+console.log(thetTimer);
 console.log(thisTimer);
 
+
+
+
+
+
+
+
+/////////////////////////////// 
 const options = {
 weekday: 'short',
 year: 'numeric',
