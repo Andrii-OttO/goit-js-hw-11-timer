@@ -1,47 +1,60 @@
 class Timer{
-    constructor(selector, targetDate){
-        this.targetDate = targetDate
-        this.interval = null
-        this.deltaTime = 0
-        //this.select = document.querySelector(selector) 
-        this.start()
-        }
-    start(){
-    this.interval = setInterval(()=> {
-        let currentTime = Date.now()
-        this.deltaTime = this.targetDate - currentTime
-        
-        this.refs.days.textContent = this.pad(Math.floor(this.deltaTime / (1000 * 60 * 60 * 24)))
-        this.refs.hours.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))
-        this.refs.mins.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60)) / (1000 * 60)))
-        this.refs.secs.textContent = this.pad(Math.floor((this.deltaTime % (1000 * 60)) / 1000))
+  constructor(selector, targetDate){
+      this.targetDate = targetDate
+      this.interval = null
+      this.deltaTime = 0
+      this.item = selector
+      
+      //this.select = document.querySelector(selector) 
+      this.start()
+      console.log('123',this.item);
+      }
+  start(){
+  this.interval = setInterval(()=> {
+      let currentTime = Date.now()
+      this.deltaTime = this.targetDate - currentTime
+      //this.getTimeF(this.refs(this.deltaTime))
+      const days = this.pad(Math.floor(this.deltaTime / (1000 * 60 * 60 * 24)));
+      const hours = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      const mins = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
+      const secs = this.pad(Math.floor((this.deltaTime % (1000 * 60)) / 1000));
+     this.refs(days,hours,mins,secs)
+      //console.log({days,hours,mins,secs}(this.refs(this.item)));
 }, 1000);}
-    // stop(){
-    //     clearInterval(this.interval)
-    refs = {
-        days : document.querySelector('[data-value="days"]'),
-        hours : document.querySelector('[data-value="hours"]'),
-        mins : document.querySelector('[data-value="mins"]'),
-        secs : document.querySelector('[data-value="secs"]'),
+  // stop(){
+  //     clearInterval(this.interval)
+  //getElementById
+   refs(){
+    days = this.item.querySelector('[data-value="days"]').textContent;
+    hours = this.item.querySelector('[data-value="hours"]').textContent;
+    mins =  this.item.querySelector('[data-value="mins"]').textContent;
+    secs = this.item.querySelector('[data-value="secs"]').textContent;
+    //return {days,hours,mins,secs}
     }
-    pad(v){
-        return String(v).padStart(2, '0')
-    }
-    
+  pad(v){
+      return String(v).padStart(2, '0')
+  }
 }
-const thisTimer = new Timer(
-    selector = "#timer-1",
-    targetDate = new Date('Jan 1, 2022'),
-  );
-const thetTimer = new Timer(
-    selector = "#timer-2",
-    targetDate = new Date('Jan 14, 2022'),
-  );
 
+
+const thisTimer = new Timer(
+  selector = "#timer-1",
+  targetDate = new Date('Jan 1, 2022'),
+);
+const thetTimer = new Timer(
+  selector = "#timer-2",
+  targetDate = new Date('Jan 14, 2022'),
+);
+
+
+// console.log('timer 1', thetTimer);
+// console.log('timer 2',thisTimer);
+  // getTimeF(){
+  //      //return {days, hours, mins, secs}
+  //     //console.log(getTimeF);
+  //     console.log('123',{days, hours, mins, secs});
+  // }
   
- 
-console.log('timer 1', thetTimer);
-console.log('timer 2',thisTimer);
 
 //////////////////////////
 // 
