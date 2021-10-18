@@ -3,9 +3,9 @@ class Timer{
       this.targetDate = targetDate
       this.interval = null
       this.deltaTime = 0
-      this.item = selector
+      //this.item = selector
       
-      //this.select = document.querySelector(selector) 
+      this.item = document.querySelector(selector) 
       this.start()
       console.log('123',this.item);
       }
@@ -16,20 +16,20 @@ class Timer{
       //const {days,hours,mins,secs} = this.getTimeComponents(this.deltaTime)
       // console.log(days,hours,mins,secs);
       this.refs(this.getTimeComponents(this.deltaTime))
-     
+     console.log(this.refs(this.getTimeComponents(this.deltaTime)));
 }, 1000);}
   // stop(){
   //     clearInterval(this.interval)
    refs({days,hours,mins,secs}){
-    document.querySelector('[data-value="days"]').textContent = days;
-    document.querySelector('[data-value="hours"]').textContent = hours;
-    document.querySelector('[data-value="mins"]').textContent = mins;
-    document.querySelector('[data-value="secs"]').textContent = secs;
+    // document.querySelector('[data-value="days"]').textContent = days;
+    // document.querySelector('[data-value="hours"]').textContent = hours;
+    // document.querySelector('[data-value="mins"]').textContent = mins;
+    // document.querySelector('[data-value="secs"]').textContent = secs;
     /////////////// должно обращатся к елементу внутри селектора
-    // this.item.querySelector('[data-value="days"]').textContent = days;;
-    // this.item.querySelector('[data-value="hours"]').textContent = hours;;
-    // this.item.querySelector('[data-value="mins"]').textContent = mins;;
-    // this.item.querySelector('[data-value="secs"]').textContent = secs;;
+    this.item.querySelector('[data-value="days"]').textContent = days;;
+    this.item.querySelector('[data-value="hours"]').textContent = hours;;
+    this.item.querySelector('[data-value="mins"]').textContent = mins;;
+    this.item.querySelector('[data-value="secs"]').textContent = secs;;
    
     }
     getTimeComponents(time){
