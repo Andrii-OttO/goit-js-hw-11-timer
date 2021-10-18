@@ -13,23 +13,31 @@ class Timer{
   this.interval = setInterval(()=> {
       let currentTime = Date.now()
       this.deltaTime = this.targetDate - currentTime
-      //this.getTimeF(this.refs(this.deltaTime))
-      const days = this.pad(Math.floor(this.deltaTime / (1000 * 60 * 60 * 24)));
-      const hours = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-      const mins = this.pad(Math.floor((this.deltaTime % (1000 * 60 * 60)) / (1000 * 60)));
-      const secs = this.pad(Math.floor((this.deltaTime % (1000 * 60)) / 1000));
-     this.refs(days,hours,mins,secs)
-      //console.log({days,hours,mins,secs}(this.refs(this.item)));
+      //const {days,hours,mins,secs} = this.getTimeComponents(this.deltaTime)
+      // console.log(days,hours,mins,secs);
+      this.refs(this.getTimeComponents(this.deltaTime))
+     
 }, 1000);}
   // stop(){
   //     clearInterval(this.interval)
-  //getElementById
-   refs(){
-    days = this.item.querySelector('[data-value="days"]').textContent;
-    hours = this.item.querySelector('[data-value="hours"]').textContent;
-    mins =  this.item.querySelector('[data-value="mins"]').textContent;
-    secs = this.item.querySelector('[data-value="secs"]').textContent;
-    //return {days,hours,mins,secs}
+   refs({days,hours,mins,secs}){
+    document.querySelector('[data-value="days"]').textContent = days;
+    document.querySelector('[data-value="hours"]').textContent = hours;
+    document.querySelector('[data-value="mins"]').textContent = mins;
+    document.querySelector('[data-value="secs"]').textContent = secs;
+    /////////////// должно обращатся к елементу внутри селектора
+    // this.item.querySelector('[data-value="days"]').textContent = days;;
+    // this.item.querySelector('[data-value="hours"]').textContent = hours;;
+    // this.item.querySelector('[data-value="mins"]').textContent = mins;;
+    // this.item.querySelector('[data-value="secs"]').textContent = secs;;
+   
+    }
+    getTimeComponents(time){
+      const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
+      const hours = this.pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
+      const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
+      return {days,hours,mins,secs}
     }
   pad(v){
       return String(v).padStart(2, '0')
